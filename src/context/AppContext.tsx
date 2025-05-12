@@ -83,7 +83,8 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const { user } = useSession();
   const [loading, setLoading] = useState(true);
 
-  const fetchCart = async () => {
+
+const fetchCart = async () => {
     try {
       if (user?.id) {
         const response = await axios.get(`/api/user/nuser?userId=${user.id}`);
@@ -106,7 +107,8 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
       setCartItems({});
     }
   };
-
+ 
+  
   const fetchProductData = async () => {
     setCurrency(
       <span>
@@ -243,8 +245,8 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     fetchProductData();
-    if (user) {
-      fetchCart();
+    if(user){
+      fetchCart()
     }
   }, [user]);
 

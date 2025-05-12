@@ -6,11 +6,9 @@ import { BiLock } from "react-icons/bi";
 import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel } from "@mui/material";
 import axios from "axios"
-
 import SocialLogin from "./SocialLogin";
 import { useAppContext } from "@/context/AppContext";
 import { toast } from "react-toastify";
-
 const LoginForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

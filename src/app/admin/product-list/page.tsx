@@ -24,23 +24,7 @@ const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchSellerProduct = async () => {
-    try {
-
-      if(isSuperAdmin){
-        const response = await axios.get("/api/products"); 
-        setProducts(response.data.products); 
-        setLoading(false);
-      }else if(isSpecificUser){
-        const response = await axios.get("/api/admin-product"); 
-      setProducts(response.data.products); 
-      setLoading(false);
-      }
-      
-    } catch {
-      console.log("An error occurred while fetching products.");
-    } 
-  };
+ 
 
   const deleteProduct = async (productId:string)=>{
     if (!confirm("Are you sure you want to delete this product?")) return;
@@ -59,8 +43,25 @@ const ProductList = () => {
   }
 
   useEffect(() => {
+    const fetchSellerProduct = async () => {
+      try {
+  
+        if(isSuperAdmin){
+          const response = await axios.get("/api/products"); 
+          setProducts(response.data.products); 
+          setLoading(false);
+        }else if(isSpecificUser){
+          const response = await axios.get("/api/admin-product"); 
+        setProducts(response.data.products); 
+        setLoading(false);
+        }
+        
+      } catch {
+        console.log("An error occurred while fetching products.");
+      } 
+    };
     fetchSellerProduct();
-  }, [isSpecificUser,isSuperAdmin]);
+  }, []);
   if (loading) {
     return <div className="text-center p-4 w-full">
         <Loading/>

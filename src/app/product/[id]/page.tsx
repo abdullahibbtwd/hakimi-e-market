@@ -30,15 +30,15 @@ const Product = () => {
     const [mainImage, setMainImage] = useState<string | null>(null);
     const [productData, setProductData] = useState<Product | null>(null);
  
-    const fetchProductData = async () => {
-        const product = products.find(product => product.id === id);
-        setProductData(product || null);
-    }
 
     useEffect(() => {
-     
+        const fetchProductData = async () => {
+            const product = products.find(product => product.id === id);
+            setProductData(product || null);
+        }
+    
         fetchProductData();
-    }, [id, products.length])
+    }, [])
 
     return productData ? (<>
 

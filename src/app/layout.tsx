@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { AppContextProvider } from "@/context/AppContext";
@@ -8,10 +7,7 @@ import { ToastContainer } from "react-toastify";
 import { usePathname } from "next/navigation";
 import Footer from "@/components/Footer";
 
-// export const metadata: Metadata = {
-//   title: "HAKIMI-e-Market",
-//   description: "Online Market",
-// };
+
 
 export default function RootLayout({
   children,
