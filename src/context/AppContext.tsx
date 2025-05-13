@@ -6,6 +6,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import axios from "axios";
 import { useSession } from "@/app/hooks/session";
 import { toast } from "react-toastify";
+import { JSX } from "react";
 
 interface CartItem {
   id: string;
