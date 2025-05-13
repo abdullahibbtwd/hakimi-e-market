@@ -8,7 +8,7 @@ interface ProductStockProps {
 
 const ProductStock: React.FC<ProductStockProps> = ({ productId }) => {
   const { products } = useAppContext();
-  const product = products.find((p) => p._id === productId);
+  const product = products.find((p) => p.id === productId);
 
   if (!product) {
     return <Typography color="error">Product not found.</Typography>;
