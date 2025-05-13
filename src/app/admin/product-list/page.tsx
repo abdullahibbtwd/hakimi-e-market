@@ -42,6 +42,8 @@ const ProductList = () => {
   }
   }
 
+ 
+
   useEffect(() => {
     const fetchSellerProduct = async () => {
       try {
@@ -62,7 +64,7 @@ const ProductList = () => {
       } 
     };
     fetchSellerProduct();
-  }, []);
+  }, [isSpecificUser,isSuperAdmin]);
   if (loading) {
     return <div className="text-center p-4 w-full">
         <Loading/>
