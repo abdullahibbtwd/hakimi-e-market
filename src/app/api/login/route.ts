@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
       }
       const checkedPassword = await bcrypt.compare(
         password,
-        existingUser.password
+        existingUser.password!
       );
       if (!checkedPassword) {
         return NextResponse.json(
