@@ -29,7 +29,7 @@ const ProductList = () => {
   const deleteProduct = async (productId:string)=>{
     if (!confirm("Are you sure you want to delete this product?")) return;
     try {
-      const response = await axios.delete(`/api/delete-product/${productId}`);
+      const response = await axios.delete(`/api/banner-delete?id=${productId}`);
 
       if (response.status === 200) {
           toast.success('Product deleted successfully!');
@@ -47,8 +47,9 @@ const ProductList = () => {
       try {
   
         if(isSuperAdmin){
-          const response = await axios.get("/api/products"); 
+          const response = await axios.get("/api/public/product"); 
           setProducts(response.data.products); 
+          console.log(response.data.products)
           setLoading(false);
         }else if(isSpecificUser){
           const response = await axios.get("/api/admin-product"); 
