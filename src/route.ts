@@ -29,7 +29,8 @@ export const authRoutes =[
  * @type {string}
  */
 
-export const apiAuthPrefix = "/api/login" 
+export const apiAuthPrefix = "/api/login"
+export const apiAuthPrefix1 = "/api/register" 
 export const publicApiRoute = "/api/public/product"
 export const adminRoute = '/admin'
 

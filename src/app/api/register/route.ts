@@ -11,11 +11,10 @@ export const POST = async  (request:NextRequest) => {
     
     const {name, email,password} = await request.json();
 
-
     if (!name || !email || !password) {
         return NextResponse.json({ error: "Please provide name, email, and password" }, { status: 400 });
       }
-  
+    
       const existingUser = await db.user.findUnique({
         where: { email },
       });
@@ -35,7 +34,7 @@ export const POST = async  (request:NextRequest) => {
         },
       });
   
-      const {  password: userPassword, ...userWithoutPassword } = newUser;
+     const {  password: newUserPassword, ...userWithoutPassword } = newUser;
   
       return NextResponse.json(userWithoutPassword, { status: 201 });
     }catch (error) {

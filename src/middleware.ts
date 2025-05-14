@@ -7,6 +7,7 @@ import {
   DEFAULT_LOGIN_REDIRECT,
   publicApiRoute,
   adminRoute,
+  apiAuthPrefix1
 } from "@/route";
 
 export async function middleware(req: NextRequest) {
@@ -16,6 +17,7 @@ export async function middleware(req: NextRequest) {
   // 1. First check public routes and API routes
   if (
     pathname.startsWith(apiAuthPrefix) ||
+    pathname.startsWith(apiAuthPrefix1) ||
     pathname.startsWith(publicApiRoute) ||
     publicRoutes.includes(pathname)
   ) {

@@ -5,18 +5,21 @@ import { CgNametag } from "react-icons/cg";
 import { BiLock } from "react-icons/bi";
 import Checkbox from "@mui/material/Checkbox";
 import { FormControlLabel } from "@mui/material";
-import axios from "axios"
+import axios from "axios";
 import SocialLogin from "./SocialLogin";
 import { useAppContext } from "@/context/AppContext";
 import { toast } from "react-toastify";
+import { ImSpinner } from "react-icons/im";
+
 const LoginForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [register, setRegister] = useState(true);
+  const [register, setRegister] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMatchError, setPasswordMatchError] = useState("");
-  const {router} = useAppContext()
+  const { router } = useAppContext();
 
   // const {
   //   register: formRegister,
@@ -27,41 +30,53 @@ const LoginForm = () => {
   // } = useForm<LoginFormData | RegisterFormData>({
   //   resolver: zodResolver(isRegister ? registerSchema : loginSchema),
   // });
-  
-  
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if(register){
-         try{
-      const formData = new FormData(e.currentTarget)
-      const name = formData.get('name')
-      const email = formData.get('email')
-      const password = formData.get('password')
-
-      const response = await axios.post( `/api/register`,{name,email,password})
-
-    if ( response.status === 201){
-      toast.success("User Created");
-      setRegister(false)
-      setName("")
-      setEmail("")
-      setConfirmPassword("")
-      setPassword("")
-    } 
-    }catch(error){
-      console.log(error)
-    }
-    }else{
-      const response = await axios.post("/api/login", { email, password });
-    if (response.status === 201) {
-    toast.success(response.data.message);
-    router.push("/")
    
-    } else{
-      toast.error(response.data.message)
+    if (register) {
+      try {
+        const formData = new FormData(e.currentTarget);
+        const name = formData.get("name");
+        const email = formData.get("email");
+        const password = formData.get("password");
+        setLoading(true);
+
+        const response = await axios.post(`/api/register`, {
+          name,
+          email,
+          password,
+        });
+
+        if (response.status === 201) {
+          toast.success("User Created");
+          setRegister(false);
+          setName("");
+          setEmail("");
+          setConfirmPassword("");
+          setPassword("");
+          setLoading(false);
+        }else if(response.status === 409){
+          toast.error("User already exist")
+        }
+          setLoading(false);
+      } catch (error) {
+        console.log(error);
+          setLoading(false);
+      }
+    } 
+    else {
+      setLoading(true)
+      const response = await axios.post("/api/login", { email, password });
+      if (response.status === 201) {
+        toast.success(response.data.message);
+        router.push("/");
+        setLoading(false)
+      } else {
+        toast.error(response.data.message);
+        setLoading(false)
+      }
     }
-    }
- 
   }
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,8 +102,10 @@ const LoginForm = () => {
       <h2 className="my-font font-semibold tracking-wider">
         HAKIMI<span className="text-green-700">-e-</span>Market
       </h2>
-      <form className="p-5 flex flex-col w-full  md:w-[50%] items-center justify-center gap-4"
-      onSubmit={handleSubmit}>
+      <form
+        className="p-5 flex flex-col w-full  md:w-[50%] items-center justify-center gap-4"
+        onSubmit={handleSubmit}
+      >
         {register ? (
           <>
             <h1 className="text-2xl font-semibold my-font text-green-800">
@@ -172,15 +189,18 @@ const LoginForm = () => {
         )}
 
         <div className="md:w-[80%] w-[90%] flex justify-center items-center ">
-          <button className="px-4 py-2 mb-2  w-max bg-green-600  text-white rounded-md cursor-pointer hover:bg-inherit hover:text-green-600 transition ease-in-out duration-500 " type="submit">
+          {loading ? <><ImSpinner className="animate-spin text-3xl text-green-600"/></>:<> <button
+            className="px-4 py-2 mb-2  w-max bg-green-600  text-white rounded-md cursor-pointer hover:bg-inherit hover:text-green-600 transition ease-in-out duration-500 "
+            type="submit"
+          >
             {register ? "Register" : "Login"}
-          </button>
+          </button></>}
+         
         </div>
         {passwordMatchError && (
           <p style={{ color: "red" }}>{passwordMatchError}</p>
         )}
 
-     
         {register ? (
           <>
             <p className="text-[15px] text-black ">
@@ -208,10 +228,9 @@ const LoginForm = () => {
         )}
       </form>
       <div className="md:w-[80%] w-[90%] border-t-2 border-gray-200 flex items-center justify-center flex-col gap-2 ">
-          <p className="text-gray-500 text-[15px]">Or</p>
-          <SocialLogin  register={register} />
-        </div>
-    
+        <p className="text-gray-500 text-[15px]">Or</p>
+        <SocialLogin register={register} />
+      </div>
     </div>
   );
 };
