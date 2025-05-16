@@ -64,7 +64,7 @@ import { UserRole } from "@prisma/client";
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+    context: { params: { id: string } }
 ) {
   try {
     const token = getTokenFromRequest(request);
@@ -86,7 +86,7 @@ export async function DELETE(
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    const bannerId = params.id;
+    const bannerId = context.params.id;
     if (!bannerId) {
       return NextResponse.json(
         { error: "Banner ID is required" },
