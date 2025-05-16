@@ -84,8 +84,7 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const { user } = useSession();
   const [loading, setLoading] = useState(true);
 
-
-const fetchCart = async () => {
+  const fetchCart = async () => {
     try {
       if (user?.id) {
         const response = await axios.get(`/api/user/nuser?userId=${user.id}`);
@@ -108,21 +107,20 @@ const fetchCart = async () => {
       setCartItems({});
     }
   };
- 
-  
+
   const fetchProductData = async () => {
     setCurrency(
       <span>
         <TbCurrencyNaira />
       </span>
     );
-  
+
     try {
       const response = await axios.get("/api/public/product");
 
       if (response.data && Array.isArray(response.data.products)) {
         setProducts(response.data.products);
-        setLoading(false)
+        setLoading(false);
       } else {
         console.log("error");
       }
@@ -143,26 +141,28 @@ const fetchCart = async () => {
     const product = products.find((p) => p.id === itemId);
     const currentQuantityInCart = cartData[itemId] || 0;
 
-    if (product && product.Stock > currentQuantityInCart) {
-      cartData[itemId] = currentQuantityInCart + 1;
-      setCartItems(cartData);
-      toast.success("Cart Added");
-      updateStock(itemId, product.Stock - 1);
-      try {
-        await axios.post("/api/cart/update", {
-          productId: itemId,
-          quantity: 1,
-        });
-       
-      } catch (error) {
-        console.error("Error posting to cart API:", error);
-        cartData[itemId] = currentQuantityInCart;
+    if (product) {
+      if (product.Stock > 0) {
+        cartData[itemId] = currentQuantityInCart + 1;
         setCartItems(cartData);
-        updateStock(itemId, product.Stock);
-      }
-    } else if (product) {
+        toast.success("Cart Added");
+        updateStock(itemId, product.Stock - 1);
+        try {
+          await axios.post("/api/cart/update", {
+            productId: itemId,
+            quantity: 1,
+          });
+        } catch (error) {
+          console.error("Error posting to cart API:", error);
+          cartData[itemId] = currentQuantityInCart;
+          setCartItems(cartData);
+          updateStock(itemId, product.Stock);
+        }
+      }else if (product) {
       alert(`Product "${product.name}" is out of stock.`);
     }
+    } 
+
     // const cartData = structuredClone(cartItems);
     // if (cartData[itemId]) {
     //   cartData[itemId] += 1;
@@ -194,7 +194,6 @@ const fetchCart = async () => {
             productId: itemId,
             quantity: -1,
           });
-          
         }
       } catch (error) {
         console.error("Error posting to cart API:", error);
@@ -246,8 +245,8 @@ const fetchCart = async () => {
 
   useEffect(() => {
     fetchProductData();
-    if(user){
-      fetchCart()
+    if (user) {
+      fetchCart();
     }
   }, [user]);
 
@@ -267,7 +266,7 @@ const fetchCart = async () => {
     filteredProducts,
     updateStock,
     loading,
-    setLoading
+    setLoading,
     // setFilteredProducts,
   };
 

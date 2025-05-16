@@ -29,7 +29,7 @@ const ProductList = () => {
   const deleteProduct = async (productId:string)=>{
     if (!confirm("Are you sure you want to delete this product?")) return;
     try {
-      const response = await axios.delete(`/api/banner-delete?id=${productId}`);
+      const response = await axios.delete(`/api/delete-product?id=${productId}`);
 
       if (response.status === 200) {
           toast.success('Product deleted successfully!');
