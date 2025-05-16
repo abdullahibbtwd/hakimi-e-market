@@ -62,10 +62,17 @@ import { db } from "@/lib/db";
 import { verifyJWT, getTokenFromRequest } from "@/utils/auth";
 import { UserRole } from "@prisma/client";
 
+interface DeleteBannerParams {
+  id: string;
+}
+
+interface DeleteBannerContext {
+  params: DeleteBannerParams;
+}
 export async function DELETE(
   request: NextRequest,
-    context: { params: { id: string } }
-) {
+   context: DeleteBannerContext
+): Promise<NextResponse> {
   try {
     const token = getTokenFromRequest(request);
     if (!token) {
