@@ -1,6 +1,5 @@
 1 payment integration
 2 - check banner updating banner
-3 - deletin of banner and product 
 4 - not fetch banner second time 
 5 - form validation
 6 - category phone a digital 

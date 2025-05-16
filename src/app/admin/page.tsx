@@ -15,7 +15,7 @@ const AddProduct = () => {
   ]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("Earphone");
+  const [category, setCategory] = useState("phonesotherdigitalitems");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [offerPrice, setOfferPrice] = useState("");
