@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import { toast  } from "react-toastify";
 import { PaystackButton } from "react-paystack";
 import dynamic from "next/dynamic";
-import Loading from "./Loading";
 
 interface Address {
   id: string;
@@ -219,12 +218,6 @@ const OrderSummary: React.FC = () => {
       </div>
       {total !== 0 && (
         <PaystackButton
-          disabled={!selectedAddress}
-          className={`w-full bg-green-600 text-white py-3 mt-5 hover:bg-green-700  ${
-            !selectedAddress
-              ? "opacity-50 cursor-not-allowed"
-              : "hover:bg-green-700 cursor-pointer"
-          } rounded-md `}
           email={user?.email || "default@example.com"}
           amount={total * 100}
           metadata={{
