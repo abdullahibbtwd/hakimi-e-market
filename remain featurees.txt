@@ -2,5 +2,3 @@
 2 - check banner updating banner
 4 - not fetch banner second time 
 5 - form validation
-6 - category phone a digital 
-7

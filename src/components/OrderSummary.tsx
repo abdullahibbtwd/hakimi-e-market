@@ -1,7 +1,11 @@
+import { useSession } from "@/app/hooks/session";
 import { useAppContext } from "@/context/AppContext";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { toast,ToastContentProps  } from "react-toastify";
+import { PaystackButton } from "react-paystack";
+import dynamic from "next/dynamic";
+import Loading from "./Loading";
 
 interface Address {
   id: string;
@@ -14,9 +18,13 @@ interface Address {
   state: string;
 }
 
-
-
 const OrderSummary: React.FC = () => {
+  const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY;
+  if (!publicKey) {
+    throw new Error(
+      "Paystack public key is not defined in environment variables"
+    );
+  }
   const {
     currency,
     router,
@@ -27,8 +35,10 @@ const OrderSummary: React.FC = () => {
   } = useAppContext();
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   const [userAddresses, setUserAddresses] = useState<Address[]>([]);
+  const { user } = useSession();
+  const [loading, setLoading] = useState(false);
+  const total = getCartAmount() + Math.floor(getCartAmount() * 0.02);
 
   const fetchUserAddresses = async () => {
     try {
@@ -43,45 +53,94 @@ const OrderSummary: React.FC = () => {
     }
   };
 
+  const PaystackButton = dynamic(
+    () => import("react-paystack").then((mod) => mod.PaystackButton),
+    { ssr: false }
+  );
+
+  const handleClosePayment = () => {
+  const toastId = toast(
+    ({ closeToast }: { closeToast?: () => void }) => (
+      <div className="bg-white p-4 rounded-lg shadow-lg">
+        <p>Are you sure you want to cancel payment?</p>
+        <div className="flex justify-end mt-4 space-x-2">
+          <button 
+            onClick={() => {
+              closeToast?.(); // Proper null check
+              // Add your cancel logic here
+            }}
+            className="px-4 py-2 bg-red-500 text-white rounded"
+          >
+            Yes, Cancel
+          </button>
+          <button 
+            onClick={() => closeToast?.()}
+            className="px-4 py-2 bg-gray-200 rounded"
+          >
+            No, Continue
+          </button>
+        </div>
+      </div>
+    ),
+    {
+      autoClose: false,
+      closeButton: false,
+    }
+  );
+};
   const handleAddressSelect = (address: Address) => {
     setSelectedAddress(address);
     setIsDropdownOpen(false);
+  };
+  const fetchCart = async () => {
+    try {
+      const response = await axios.get("/api/cart/get");
+      setCartItems(response.data.items || {});
+    } catch (error) {
+      console.error("Error fetching cart:", error);
+    }
   };
 
   const handlePlaceOrder = async () => {
     const addressId = selectedAddress?.id; // Ensure `selectedAddress` is defined
     const total = getCartAmount();
     const cartItemsArray = Array.isArray(cartItems)
-    ? cartItems
-    : Object.entries(cartItems || {}).map(([id, quantity]) => ({
-        id,
-        quantity,
-      }));
+      ? cartItems
+      : Object.entries(cartItems || {}).map(([id, quantity]) => ({
+          id,
+          quantity,
+        }));
 
-  const items = cartItemsArray.map((item) => ({
-    productId: item.id,
-    quantity: item.quantity,
-  }));
+    const items = cartItemsArray.map((item) => ({
+      productId: item.id,
+      quantity: item.quantity,
+    }));
 
     if (!addressId) {
       toast.error("Please select an address before placing the order.");
       return;
     }
-  
+
     if (items.length === 0) {
       toast.error("Your cart is empty. Add items to proceed.");
       return;
     }
-  
+
     try {
-      const response = await axios.post("/api/order", { addressId, items, total });
-  
-      if (response.status === 201) {
+      const response = await axios.post("/api/order", {
+        addressId,
+        items,
+        total,
+      });
+
+      if (response.status === 200) {
         toast.success("Order placed successfully!");
-        setCartItems({}); 
-        router.push("/order-placed"); 
+        setCartItems({});
+        router.push("/order-placed");
       } else {
-        toast.error(response.data.error || "An error occurred while placing the order.");
+        toast.error(
+          response.data.error || "An error occurred while placing the order."
+        );
       }
     } catch (error) {
       console.error("Error placing order:", error);
@@ -183,18 +242,47 @@ const OrderSummary: React.FC = () => {
             <p>Total</p>
             <p className="flex items-center">
               <span className="text-2xl">{currency}</span>
-              {getCartAmount() + Math.floor(getCartAmount() * 0.02)}
+              {total}
             </p>
           </div>
         </div>
       </div>
+      {total !== 0 && (
+        <PaystackButton
+          disabled={!selectedAddress}
+          className={`w-full bg-green-600 text-white py-3 mt-5 hover:bg-green-700  ${
+            !selectedAddress
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-green-700 cursor-pointer"
+          } rounded-md `}
+          email={user?.email || "default@example.com"}
+          amount={total * 100}
+          metadata={{
+            name: user?.name || "Customer",
+            custom_fields: [],
+          }}
+          publicKey={publicKey}
+          text="CHECK OUT"
+          onSuccess={async () => {
+            try {
+              await handlePlaceOrder();
+              toast.success("Thank You For Shopping With Us");
 
-      <button
-    onClick={handlePlaceOrder}
+              await fetchCart(); 
+            } catch (error) {
+              toast.error("Failed to complete order");
+            }
+          }}
+          onClose={() => alert("Are you sure you want to close")}
+        />
+      )}
+
+      {/* <button
+        onClick={handlePlaceOrder}
         className="w-full bg-green-600 text-white py-3 mt-5 hover:bg-green-700"
       >
         Place Order
-      </button>
+      </button> */}
     </div>
   );
 };
