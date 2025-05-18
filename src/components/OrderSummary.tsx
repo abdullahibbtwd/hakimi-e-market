@@ -2,7 +2,7 @@ import { useSession } from "@/app/hooks/session";
 import { useAppContext } from "@/context/AppContext";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { toast,ToastContentProps  } from "react-toastify";
+import { toast  } from "react-toastify";
 import { PaystackButton } from "react-paystack";
 import dynamic from "next/dynamic";
 import Loading from "./Loading";
@@ -37,7 +37,6 @@ const OrderSummary: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userAddresses, setUserAddresses] = useState<Address[]>([]);
   const { user } = useSession();
-  const [loading, setLoading] = useState(false);
   const total = getCartAmount() + Math.floor(getCartAmount() * 0.02);
 
   const fetchUserAddresses = async () => {
@@ -58,36 +57,7 @@ const OrderSummary: React.FC = () => {
     { ssr: false }
   );
 
-  const handleClosePayment = () => {
-  const toastId = toast(
-    ({ closeToast }: { closeToast?: () => void }) => (
-      <div className="bg-white p-4 rounded-lg shadow-lg">
-        <p>Are you sure you want to cancel payment?</p>
-        <div className="flex justify-end mt-4 space-x-2">
-          <button 
-            onClick={() => {
-              closeToast?.(); // Proper null check
-              // Add your cancel logic here
-            }}
-            className="px-4 py-2 bg-red-500 text-white rounded"
-          >
-            Yes, Cancel
-          </button>
-          <button 
-            onClick={() => closeToast?.()}
-            className="px-4 py-2 bg-gray-200 rounded"
-          >
-            No, Continue
-          </button>
-        </div>
-      </div>
-    ),
-    {
-      autoClose: false,
-      closeButton: false,
-    }
-  );
-};
+
   const handleAddressSelect = (address: Address) => {
     setSelectedAddress(address);
     setIsDropdownOpen(false);
