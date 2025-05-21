@@ -1,4 +1,5 @@
 {
+ 
   "name": "elversh-market",
   "version": "0.1.0",
   "private": true,
@@ -40,6 +41,7 @@
     "@types/node": "^20",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.4",
+    "@types/webpack": "^5.28.5",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "prisma": "^6.7.0",
