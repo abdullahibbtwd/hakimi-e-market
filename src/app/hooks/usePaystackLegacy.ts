@@ -5,7 +5,6 @@ const usePaystackLegacy = () => {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    // Check if script already exists
     if (document.querySelector('script[src="https://js.paystack.co/v1/inline.js"]')) {
       setIsReady(true);
       return;

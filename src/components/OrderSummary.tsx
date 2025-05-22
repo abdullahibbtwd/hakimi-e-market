@@ -66,11 +66,7 @@ const OrderSummary: React.FC = () => {
     // });
   };
 
-  // const PaystackButton = dynamic(
-  //   () => import("react-paystack").then((mod) => mod.PaystackButton),
-  //   { ssr: false }
-  // );
-
+ 
 
 
   const handleAddressSelect = (address: Address) => {
@@ -232,8 +228,10 @@ const OrderSummary: React.FC = () => {
           </div>
         </div>
       </div>
- <PaystackLegacyButton
-        amount={total} // in Naira
+      <div className="w-full flex items-center justify-center">
+        {!selectedAddress ? "Select Address To Pay" :
+         <PaystackLegacyButton
+        amount={total} 
         email={user?.email || "costumer@email.com"}
         publicKey={publicKey}
         reference={`PAY-${Date.now()}`}
@@ -241,10 +239,14 @@ const OrderSummary: React.FC = () => {
         lastname={user?.name}
         onSuccess={handlePaymentSuccess}
         onClose={() => toast.error('Payment window closed')}
-        className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 transition-colors"
+        className="w-full bg-green-600 text-white py-3 mt-10 hover:bg-green-700"
       >
         Pay {total}
       </PaystackLegacyButton>
+        } 
+        
+      </div>
+
       {/* {total !== 0 && (
         <PaystackButton
           email={user?.email || "default@example.com"}
