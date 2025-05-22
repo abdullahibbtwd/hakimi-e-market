@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useAppContext } from "@/context/AppContext";
-import Loading from "@/components/Loading";
+import { useAppContext } from "../../../context/AppContext";
+import Loading from "../../../components/Loading";
 import { FaBoxOpen } from "react-icons/fa";
-import Footer from "@/components/admin/Footer";
+import Footer from "../../../components/admin/Footer";
 import axios from "axios";
-import { OrderStatus } from "@prisma/client";
+import { OrderStatus } from "../../../../node_modules/.prisma/client";
 import { toast } from "react-toastify";
 
 interface Orders {
