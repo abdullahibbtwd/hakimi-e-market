@@ -1,6 +1,6 @@
 "use client";
-import Loading from "@/components/Loading";
-import { UserRole } from "@prisma/client";
+import Loading from "../../../components/Loading";
+import { UserRole } from "../../../../node_modules/.prisma/client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
