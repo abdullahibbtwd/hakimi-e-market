@@ -1,50 +1,137 @@
 {
  
   "name": "elversh-market",
+ 
   "version": "0.1.0",
+ 
   "private": true,
+ 
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "prisma generate  && next build && echo 'Skipping linting'",
-    "start": "next start"
+ 
+   
+  "dev": "next dev --turbopack",
+ 
+   
+  "build": "prisma generate  && next build && echo 'Skipping linting'",
+ 
+   
+  "start": "next start"
+ 
   },
+ 
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@hookform/resolvers": "^5.0.1",
-    "@mui/material": "^7.0.2",
-    "@paystack/inline-js": "^2.22.4",
-    "axios": "^1.8.4",
-    "bcryptjs": "^3.0.2",
-    "cloudinary": "^2.6.0",
-    "cookie": "^1.0.2",
-    "jose": "^6.0.10",
-    "jsonwebtoken": "^9.0.2",
-    "next": "^15.3.2",
-    "next-auth": "^5.0.0-beta.26",
-    "next-cloudinary": "^6.16.0",
-    "nookies": "^2.5.2",
-    "postcss": "^8.5.3",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-hook-form": "^7.56.3",
-    "react-icons": "^5.5.0",
-    "react-toastify": "^11.0.5",
-    "zod": "^3.24.4"
+ 
+   
+  "@emotion/react": "^11.14.0",
+ 
+   
+  "@emotion/styled": "^11.14.0",
+ 
+   
+  "@hookform/resolvers": "^5.0.1",
+ 
+   
+  "@mui/material": "^7.0.2",
+ 
+   
+  "@paystack/inline-js": "^2.22.4",
+ 
+   
+  "axios": "^1.8.4",
+ 
+   
+  "bcryptjs": "^3.0.2",
+ 
+   
+  "cloudinary": "^2.6.0",
+ 
+   
+  "cookie": "^1.0.2",
+ 
+   
+  "flutterwave-node-v3": "^1.3.0",
+ 
+   
+  "jose": "^6.0.10",
+ 
+   
+  "jsonwebtoken": "^9.0.2",
+ 
+   
+  "next": "^15.3.2",
+ 
+   
+  "next-auth": "^5.0.0-beta.26",
+ 
+   
+  "next-cloudinary": "^6.16.0",
+ 
+   
+  "nookies": "^2.5.2",
+ 
+   
+  "postcss": "^8.5.3",
+ 
+   
+  "react": "^19.1.0",
+ 
+   
+  "react-dom": "^19.1.0",
+ 
+   
+  "react-hook-form": "^7.56.3",
+ 
+   
+  "react-icons": "^5.5.0",
+ 
+   
+  "react-toastify": "^11.0.5",
+ 
+   
+  "zod": "^3.24.4"
+ 
   },
+ 
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@prisma/client": "^6.7.0",
-    "@tailwindcss/postcss": "^4.1.3",
-    "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^20",
-    "@types/react": "^19.1.4",
-    "@types/react-dom": "^19.1.4",
-    "@types/webpack": "^5.28.5",
-    "eslint": "^9",
-    "eslint-config-next": "15.2.4",
-    "prisma": "^6.7.0",
-    "tailwindcss": "^4.1.3",
-    "typescript": "^5.8.3"
+ 
+   
+  "@eslint/eslintrc": "^3",
+ 
+   
+  "@prisma/client": "^6.7.0",
+ 
+   
+  "@tailwindcss/postcss": "^4.1.3",
+ 
+   
+  "@types/jsonwebtoken": "^9.0.9",
+ 
+   
+  "@types/node": "^20",
+ 
+   
+  "@types/react": "^19.1.4",
+ 
+   
+  "@types/react-dom": "^19.1.4",
+ 
+   
+  "@types/webpack": "^5.28.5",
+ 
+   
+  "eslint": "^9",
+ 
+   
+  "eslint-config-next": "15.2.4",
+ 
+   
+  "prisma": "^6.7.0",
+ 
+   
+  "tailwindcss": "^4.1.3",
+ 
+   
+  "typescript": "^5.8.3"
+ 
   }
 }

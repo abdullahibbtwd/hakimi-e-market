@@ -3,8 +3,11 @@ import { useAppContext } from "../context/AppContext";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast  } from "react-toastify";
-// import { PaystackButton } from "react-paystack";
 import dynamic from "next/dynamic";
+import PaystackLegacyButton from "./PaystackButton";
+
+
+
 
 interface Address {
   id: string;
@@ -51,10 +54,23 @@ const OrderSummary: React.FC = () => {
     }
   };
 
+  const handlePaymentSuccess = () => {
+    toast.success('Payment successful:');
+    // Verify payment with your backend
+    // fetch('/api/verify-payment', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ reference: response.reference }),
+    // });
+  };
+
   // const PaystackButton = dynamic(
   //   () => import("react-paystack").then((mod) => mod.PaystackButton),
   //   { ssr: false }
   // );
+
 
 
   const handleAddressSelect = (address: Address) => {
@@ -216,6 +232,19 @@ const OrderSummary: React.FC = () => {
           </div>
         </div>
       </div>
+ <PaystackLegacyButton
+        amount={total} // in Naira
+        email={user?.email || "costumer@email.com"}
+        publicKey={publicKey}
+        reference={`PAY-${Date.now()}`}
+        firstname={user?.name}
+        lastname={user?.name}
+        onSuccess={handlePaymentSuccess}
+        onClose={() => toast.error('Payment window closed')}
+        className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 transition-colors"
+      >
+        Pay {total}
+      </PaystackLegacyButton>
       {/* {total !== 0 && (
         <PaystackButton
           email={user?.email || "default@example.com"}
