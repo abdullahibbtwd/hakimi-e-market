@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import SideBar from "@/components/admin/Sidebar";
+import SideBar from "../../components/admin/Sidebar";
 const Layout = ({
   children,
 }: Readonly<{

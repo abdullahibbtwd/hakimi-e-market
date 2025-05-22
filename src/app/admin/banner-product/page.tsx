@@ -1,6 +1,6 @@
 "use client";
-import Footer from "@/components/admin/Footer";
-import { useAppContext } from "@/context/AppContext";
+import Footer from "../../../components/admin/Footer";
+import { useAppContext } from "../../../context/AppContext";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";

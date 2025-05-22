@@ -1,8 +1,8 @@
 "use client"
 import React from 'react'
-import { addressDummyData } from '@/Data'
+import { addressDummyData } from '../../Data'
 import { Button } from "@mui/material";
-import { useAppContext } from '@/context/AppContext';
+import { useAppContext } from '../../context/AppContext';
 
 
 const Account: React.FC = () => {
