@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import ProductCard from "./ProductsCard";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "../context/AppContext";
 import Loading from "./Loading";
 
 const Products = () => {

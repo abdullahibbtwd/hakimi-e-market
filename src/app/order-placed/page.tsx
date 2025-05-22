@@ -1,6 +1,6 @@
 'use client'
 import { GiCheckMark } from 'react-icons/gi'
-import { useAppContext } from '@/context/AppContext'
+import { useAppContext } from '../../context/AppContext'
 import { useEffect } from 'react'
 
 const OrderPlaced = () => {

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Footer from "../../components/admin/Footer";
-import { DataCategories } from "@/Data";
+import { DataCategories } from "../../Data";
 import axios from "axios";
 import { toast } from "react-toastify";
 

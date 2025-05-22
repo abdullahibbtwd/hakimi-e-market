@@ -1,11 +1,11 @@
 "use client"
 import { useEffect, useState } from "react";
-import ProductCard from "@/components/ProductsCard";
+import ProductCard from "../../../components/ProductsCard";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import Loading from "@/components/Loading";
+import Loading from "../../../components/Loading";
 import React from "react";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "../../../context/AppContext";
 import { FaStar } from "react-icons/fa";
 
 interface Product {

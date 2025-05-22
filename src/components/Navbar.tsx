@@ -6,9 +6,9 @@ import { BsCart } from "react-icons/bs";
 import { MdNotifications } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "../context/AppContext";
 import { Button, Menu, MenuItem } from "@mui/material";
-import { useSession } from "@/app/hooks/session";
+import { useSession } from "../app/hooks/session";
 
 const Navbar = () => {
   const [search, setSearch] = useState(false);

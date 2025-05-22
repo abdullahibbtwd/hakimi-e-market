@@ -1,5 +1,5 @@
-import {auth,signOut} from "@/auth"
-import Logout from "@/components/auth/Logout";
+import {auth,signOut} from "../../auth"
+import Logout from "../../components/auth/Logout";
 import { redirect } from "next/navigation";
 
  

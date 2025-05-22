@@ -1,9 +1,9 @@
 "use client";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "../../../context/AppContext";
 import { useParams } from "next/navigation";
 import React from "react";
-import ProductCard from "@/components/ProductsCard";
-import { DataCategories } from "@/Data";
+import ProductCard from "../../../components/ProductsCard";
+import { DataCategories } from "../../../Data";
 
 // interface Product {
 //   _id: string;

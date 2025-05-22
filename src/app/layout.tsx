@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import Navbar from "@/components/Navbar";
+import Navbar from "../components/Navbar";
 import "./globals.css";
-import { AppContextProvider } from "@/context/AppContext";
+import { AppContextProvider } from "../context/AppContext";
 import { ToastContainer } from "react-toastify";
 import { usePathname } from "next/navigation";
-import Footer from "@/components/Footer";
+import Footer from "../components/Footer";
 
 
 

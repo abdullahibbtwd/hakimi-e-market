@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useAppContext } from "@/context/AppContext";
-import Loading from "@/components/Loading";
+import { useAppContext } from "../../context/AppContext";
+import Loading from "../../components/Loading";
 import { FaBox } from "react-icons/fa";
 import axios from "axios";
 import Button from "@mui/material/Button";

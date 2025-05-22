@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image';
-import { useAppContext } from '@/context/AppContext';
+import { useAppContext } from '../context/AppContext';
 
 interface Product {
     id: string;

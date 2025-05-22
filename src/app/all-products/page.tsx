@@ -1,7 +1,7 @@
 "use client"
-import Category from '@/components/Category';
-import ProductCard from '@/components/ProductsCard';
-import { useAppContext } from '@/context/AppContext';
+import Category from '../../components/Category';
+import ProductCard from '../../components/ProductsCard';
+import { useAppContext } from '../../context/AppContext';
 import React from 'react'
 
 const AllProduct = () => {

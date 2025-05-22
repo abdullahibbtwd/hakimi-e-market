@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { getTokenFromRequest, verifyJWT } from "@/utils/auth";
+import { getTokenFromRequest, verifyJWT } from "../src/utils/auth";
 import {
   apiAuthPrefix,
   publicRoutes,
@@ -8,7 +8,7 @@ import {
   publicApiRoute,
   adminRoute,
   apiAuthPrefix1
-} from "@/route";
+} from "../src/route";
 
 export async function middleware(req: NextRequest) {
   const { nextUrl } = req;

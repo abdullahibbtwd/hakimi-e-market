@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import OrderSummary from "@/components/OrderSummary";
+import OrderSummary from "../../components/OrderSummary";
 import Image from "next/image";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 import { BiRightArrow } from "react-icons/bi";
 import { BiLeftArrow } from "react-icons/bi";
 

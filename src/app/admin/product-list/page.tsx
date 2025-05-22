@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { useAppContext } from "@/context/AppContext";
-import Footer from "@/components/admin/Footer";
-import Loading from "@/components/Loading";
+import { useAppContext } from "../../../context/AppContext";
+import Footer from "../../../components/admin/Footer";
+import Loading from "../../../components/Loading";
 import { LuArrowUpRight } from "react-icons/lu";
 import axios from "axios";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
-import { useSession } from "@/app/hooks/session";
+import { useSession } from "../../../app/hooks/session";
 
 interface Product {
   id:string;

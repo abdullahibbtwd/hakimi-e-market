@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import axios from "axios";
-import { useSession } from "@/app/hooks/session";
+import { useSession } from "../app/hooks/session";
 import { toast } from "react-toastify";
 import { JSX } from "react";
 

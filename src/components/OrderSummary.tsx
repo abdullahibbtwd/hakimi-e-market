@@ -1,5 +1,5 @@
-import { useSession } from "@/app/hooks/session";
-import { useAppContext } from "@/context/AppContext";
+import { useSession } from "../app/hooks/session";
+import { useAppContext } from "../context/AppContext";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast  } from "react-toastify";
