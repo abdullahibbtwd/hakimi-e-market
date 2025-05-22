@@ -3,7 +3,7 @@ import { useAppContext } from "@/context/AppContext";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast  } from "react-toastify";
-import { PaystackButton } from "react-paystack";
+// import { PaystackButton } from "react-paystack";
 import dynamic from "next/dynamic";
 
 interface Address {
@@ -51,10 +51,10 @@ const OrderSummary: React.FC = () => {
     }
   };
 
-  const PaystackButton = dynamic(
-    () => import("react-paystack").then((mod) => mod.PaystackButton),
-    { ssr: false }
-  );
+  // const PaystackButton = dynamic(
+  //   () => import("react-paystack").then((mod) => mod.PaystackButton),
+  //   { ssr: false }
+  // );
 
 
   const handleAddressSelect = (address: Address) => {
@@ -216,7 +216,7 @@ const OrderSummary: React.FC = () => {
           </div>
         </div>
       </div>
-      {total !== 0 && (
+      {/* {total !== 0 && (
         <PaystackButton
           email={user?.email || "default@example.com"}
           amount={total * 100}
@@ -238,7 +238,7 @@ const OrderSummary: React.FC = () => {
           }}
           onClose={() => alert("Are you sure you want to close")}
         />
-      )}
+      )} */}
 
       {/* <button
         onClick={handlePlaceOrder}
